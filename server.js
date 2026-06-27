@@ -7,6 +7,11 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+// Rute Halaman Utama agar Vercel tidak eror 500
+app.get('/', (req, res) => {
+    res.send('Selamat datang! API UAS Backend Berhasil Berjalan Aman.');
+});
+
 // Dummy Data untuk simulasi database sementara
 let karyawan = [
     { id: 1, nama: "Budi", posisi: "Backend Developer" }
