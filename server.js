@@ -3,11 +3,11 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
+// Middleware wajib
 app.use(cors());
 app.use(express.json());
 
-// Dummy Data untuk simulasi database sementara
+// Dummy Data sesuai dokumentasi APIDog Anda
 let karyawan = [
     { id: 1, nama: "Budi", posisi: "Backend Developer" }
 ];
@@ -17,7 +17,7 @@ let departemen = [
     { id_departemen: "DEPT-02", nama_departemen: "Human Resources", jumlah_karyawan: 5 }
 ];
 
-// Rute Halaman Utama agar Vercel tidak eror 500
+// Rute Halaman Utama (Biar Vercel tidak eror 500 saat pertama dibuka)
 app.get('/', (req, res) => {
     res.status(200).json({
         status: "success",
@@ -81,12 +81,5 @@ app.get('/api/departemen', (req, res) => {
     res.status(200).json({ status: "success", data: departemen });
 });
 
-// Hanya jalankan listen jika tidak di lingkungan Vercel Production
-if (process.env.NODE_ENV !== 'production') {
-    app.listen(PORT, () => {
-        console.log(`Server running locally on port ${PORT}`);
-    });
-}
-
-// EKSPOR UTK VERCEL
+// Jangan hapus baris ekspor ini, ini jantungnya Vercel Serverless
 module.exports = app;
